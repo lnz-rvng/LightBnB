@@ -39,7 +39,6 @@ const getUserWithId = function (id) {
   return pool
   .query('SELECT * FROM users WHERE id = $1', [id])
   .then(res => {
-    console.log(res)
     if (res.rows.length > 0) {
       return res.rows[0];
     }
