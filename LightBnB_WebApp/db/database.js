@@ -16,7 +16,7 @@ const pool = new Pool({
  * @param {String} email The email of the user.
  * @return {Promise<{}>} A promise to the user.
  */
-const getUserWithEmail = function (email) {
+const getUserWithEmail = function(email) {
   return pool.query('SELECT * FROM users WHERE email = $1', [email])
     .then(res => {
       if (res.rows.length > 0) {
@@ -26,7 +26,7 @@ const getUserWithEmail = function (email) {
     })
     .catch(err => {
       console.log(err.message);
-    })
+    });
 };
 
 /**
@@ -34,7 +34,7 @@ const getUserWithEmail = function (email) {
  * @param {string} id The id of the user.
  * @return {Promise<{}>} A promise to the user.
  */
-const getUserWithId = function (id) {
+const getUserWithId = function(id) {
   return pool.query('SELECT * FROM users WHERE id = $1', [id])
     .then(res => {
       if (res.rows.length > 0) {
@@ -44,7 +44,7 @@ const getUserWithId = function (id) {
     })
     .catch(err => {
       console.log(err.message);
-    })
+    });
 };
 
 /**
@@ -52,7 +52,7 @@ const getUserWithId = function (id) {
  * @param {{name: string, password: string, email: string}} user
  * @return {Promise<{}>} A promise to the user.
  */
-const addUser = function (user) {
+const addUser = function(user) {
   const { name, email, password } = user;
 
   return pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3)RETURNING *', [name, email, password])
@@ -61,7 +61,7 @@ const addUser = function (user) {
     })
     .catch(err => {
       console.log(err.message);
-    })
+    });
 };
 
 /// Reservations
@@ -71,7 +71,7 @@ const addUser = function (user) {
  * @param {string} guest_id The id of the user.
  * @return {Promise<[{}]>} A promise to the reservations.
  */
-const getAllReservations = function (guest_id, limit = 10) {
+const getAllReservations = function(guest_id, limit = 10) {
   return pool.query(`SELECT properties.*, reservations.*, avg(property_reviews.rating) AS average_rating
   FROM reservations
   JOIN properties ON reservations.property_id = properties.id
@@ -84,8 +84,8 @@ const getAllReservations = function (guest_id, limit = 10) {
       return res.rows;
     })
     .catch(err => {
-      console.log(err.message)
-    })
+      console.log(err.message);
+    });
 };
 
 /// Properties
@@ -96,9 +96,9 @@ const getAllReservations = function (guest_id, limit = 10) {
  * @param {*} limit The number of results to return.
  * @return {Promise<[{}]>}  A promise to the properties.
  */
-const getAllProperties = function (options, limit = 10) {
+const getAllProperties = function(options, limit = 10) {
 
-  const queryParams = []
+  const queryParams = [];
 
   let queryString = `
     SELECT properties.*, avg(property_reviews.rating) as average_rating
@@ -148,11 +148,11 @@ const getAllProperties = function (options, limit = 10) {
 
   return pool.query(queryString, queryParams)
     .then(res => {
-      return res.rows
+      return res.rows;
     })
     .catch(err => {
-      console.log(err.message)
-    })
+      console.log(err.message);
+    });
 };
 
 /**
@@ -160,18 +160,18 @@ const getAllProperties = function (options, limit = 10) {
  * @param {{}} property An object containing all of the property details.
  * @return {Promise<{}>} A promise to the property.
  */
-const addProperty = function (property) {
+const addProperty = function(property) {
   const { owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms } = property;
 
-  const values = [ owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms ]
+  const values = [ owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms ];
 
   return pool.query('INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *;', values)
-  .then(res => {
-    return res.rows[0];
-  })
-  .catch(err => {
-    console.log(err.message);
-  })
+    .then(res => {
+      return res.rows[0];
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
 };
 
 module.exports = {
