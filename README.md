@@ -16,3 +16,19 @@ A simple multi-page Airbnb clone that uses a server-side Javascript to display t
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
 
+## SCREENSHOTS
+
+### Screenshot of the login page
+![screenshot of the login page](https://github.com/lnz-rvng/LightBnB/blob/master/docs/01_login-page.png?raw=true)
+
+### Screenshot of the properties page
+![screenshot of the properties page](https://github.com/lnz-rvng/LightBnB/blob/master/docs/02_properties.png?raw=true)
+
+### Screenshot of the search page
+![screenshot of the search page](https://github.com/lnz-rvng/LightBnB/blob/master/docs/03_filter-results.png?raw=true)
+
+### Screenshot of the create listings page
+![screenshot of the create listings page](https://github.com/lnz-rvng/LightBnB/blob/master/docs/04_create-listings.png?raw=true)
+
+### Screenshot of the reservations page
+![screenshot of the reservations page](https://github.com/lnz-rvng/LightBnB/blob/master/docs/05_reservations.png?raw=true)
