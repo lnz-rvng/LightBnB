@@ -137,9 +137,8 @@ const getAllProperties = function (options, limit = 10) {
 
   // Filter by minimum rating
   if (options.minimum_rating) {
-
     queryParams.push(options.minimum_rating);
-    queryString += ` AND property_reviews.rating >= $${queryParams.length} `;
+    queryString += `HAVING avg(property_reviews.rating) >= $${queryParams.length} `;
   }
 
   // Add the GROUP BY, ORDER BY, and LIMIT clauses
